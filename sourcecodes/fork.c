@@ -5,7 +5,7 @@
 #include <sys/wait.h>
 #include <string.h>
 
-#define MAXSIZE 128
+#define MAXSIZE 128 
 
 int main( int argc, char* argv[])
 {
@@ -16,26 +16,30 @@ int main( int argc, char* argv[])
 	
 	while( gets(appname) != NULL)
 	{
-		puts(appname);
-		appname[strlen(appname)-1]=0;
-	
+	//	appname[strlen(appname)-1]=0;
+	//	puts(appname);
 		if ( ( child=fork()) <0 )
 		{		
 			printf(" fork() error \n");
 			exit(-1);
 		}
-		
-		if( child == 0 ) //child process
+		if ( child == 0 ) //child process
 		{
-			printf("in child process");
-			fflush(1);
-			int result= execlp(appname,(char *)0);
+			printf("in child process\n");
+	//		fprintf(stdout,"in child process \n");   // notice: stdout != 1 ,as stdout's type is FILE * 
+			int result= execlp(appname,appname,(char *)0);
 			exit(result);
 		}
-		else
+
 		{
-			printf("in parent process");
+			fprintf(stdout,"in parent process\n");
 			waitpid( child,status,0);
+			if ( WIFEXITED(status))
+			{
+				printf("return value is :%d", WEXITSTATUS(status));
+			}
+			
+			printf("in parent process2\n");
 		}
 
 	}

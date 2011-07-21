@@ -9,5 +9,7 @@ fork:fork.o
 fork.o:fork.c
 	gcc -g -c fork.c -o fork.o
 	
+error:error.c
+	gcc -g -o error error.c
 clean:
-	rm -rf *.o dir fork
+	rm -rf *.o dir fork error
