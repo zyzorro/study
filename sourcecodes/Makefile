@@ -11,5 +11,10 @@ fork.o:fork.c
 	
 error:error.c
 	gcc -g -o error error.c
+
+cpptest:cpptest.cpp
+	g++ -g cpptest.cpp  -o test
+
 clean:
-	rm -rf *.o dir fork error
+	rm -rf *.o dir fork error test
+
